@@ -29,7 +29,7 @@ export const Cart: React.FC<CartProps> = ({
   const formatCustomizations = (item: CartItem) => {
     const parts: string[] = [];
     
-    Object.entries(item.customizations).forEach(([groupId, options]) => {
+    Object.entries(item.customizations).forEach(([, options]) => {
       if (options.length > 0) {
         const optionNames = options.map((o) => o.name).join(', ');
         parts.push(optionNames);
