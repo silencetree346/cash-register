@@ -116,6 +116,10 @@ npm run preview
 
 （可以在这里添加应用截图）
 
+## 在线演示
+
+访问 https://silencetree346.github.io/cash-register/ 查看在线演示
+
 ## 许可证
 
 MIT
