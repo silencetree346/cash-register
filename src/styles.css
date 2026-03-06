@@ -35,7 +35,7 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
   padding: 20px;
   text-align: center;
@@ -68,13 +68,13 @@ body {
 
 .category-btn:hover {
   background: #f8f8f8;
-  border-color: #8B5A3C;
+  border-color: #00A0E9;
 }
 
 .category-btn.active {
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
-  border-color: #6B4423;
+  border-color: #0066CC;
 }
 
 .products {
@@ -96,7 +96,7 @@ body {
 .product-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  border-color: #8B5A3C;
+  border-color: #00A0E9;
 }
 
 .product-card h3 {
@@ -108,7 +108,7 @@ body {
 .product-card .price {
   font-size: 24px;
   font-weight: 700;
-  color: #6B4423;
+  color: #0066CC;
 }
 
 .cart {
@@ -192,7 +192,7 @@ body {
 }
 
 .quantity-btn {
-  background: #8B5A3C;
+  background: #00A0E9;
   color: white;
   border: none;
   width: 28px;
@@ -205,13 +205,13 @@ body {
 }
 
 .quantity-btn:hover {
-  background: #6B4423;
+  background: #0066CC;
 }
 
 .cart-item-price {
   font-size: 18px;
   font-weight: 700;
-  color: #6B4423;
+  color: #0066CC;
 }
 
 .cart-summary {
@@ -240,7 +240,7 @@ body {
 .checkout-btn {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -253,7 +253,7 @@ body {
 
 .checkout-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
 }
 
 .checkout-btn:disabled {
@@ -309,7 +309,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
   border-radius: 16px 16px 0 0;
 }
@@ -374,20 +374,20 @@ body {
 }
 
 .option-btn:hover {
-  border-color: #8B5A3C;
+  border-color: #00A0E9;
   background: #f8f8f8;
 }
 
 .option-btn.selected {
-  background: #8B5A3C;
+  background: #00A0E9;
   color: white;
-  border-color: #6B4423;
+  border-color: #0066CC;
 }
 
 .customization-toggle {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -400,7 +400,7 @@ body {
 
 .customization-toggle:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
 }
 
 .add-to-cart-btn {
@@ -441,14 +441,14 @@ body {
 }
 
 .payment-method-btn:hover {
-  border-color: #8B5A3C;
+  border-color: #00A0E9;
   background: #f8f8f8;
 }
 
 .payment-method-btn.selected {
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
-  border-color: #6B4423;
+  border-color: #0066CC;
 }
 
 .cash-input-section {
@@ -479,7 +479,7 @@ body {
 
 .cash-input-section input:focus {
   outline: none;
-  border-color: #8B5A3C;
+  border-color: #00A0E9;
 }
 
 .change-display {
@@ -586,7 +586,7 @@ body {
 .new-order-btn {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  background: linear-gradient(135deg, #0066CC 0%, #00A0E9 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -598,5 +598,5 @@ body {
 
 .new-order-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
 }
