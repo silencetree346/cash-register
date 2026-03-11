@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { products, categories } from './data/products';
 import { Product, CartItem, Order } from './types';
 import { ProductSelector } from './components/ProductSelector';
 import { Cart } from './components/Cart';
 import { Payment } from './components/Payment';
 import { OrderComplete } from './components/OrderComplete';
+import { Navigation } from './components/Navigation';
+import { CashCount } from './components/CashCount';
 import './styles.css';
 
 function App() {
+  const [currentView, setCurrentView] = useState<'order' | 'cashcount'>('order');
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showPayment, setShowPayment] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
+  const [orderHistory, setOrderHistory] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const savedOrders = localStorage.getItem('orderHistory');
+    if (savedOrders) {
+      setOrderHistory(JSON.parse(savedOrders));
+    }
+  }, []);
 
   const filteredProducts = products.filter(
     (p) => p.category === selectedCategory
@@ -52,6 +63,9 @@ function App() {
   };
 
   const handlePaymentComplete = (order: Order) => {
+    const newOrderHistory = [...orderHistory, order];
+    setOrderHistory(newOrderHistory);
+    localStorage.setItem('orderHistory', JSON.stringify(newOrderHistory));
     setCompletedOrder(order);
     setShowPayment(false);
   };
@@ -72,47 +86,55 @@ function App() {
 
   return (
     <div className="app">
+      <Navigation currentView={currentView} onViewChange={setCurrentView} />
+
       <div className="main-content">
         <div className="header">
           <h1>☕ 咖啡收银系统</h1>
         </div>
 
-        <div style={{ padding: '20px' }}>
-          <div className="categories">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`category-btn ${
-                  selectedCategory === category ? 'active' : ''
-                }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+        {currentView === 'order' ? (
+          <div style={{ padding: '20px' }}>
+            <div className="categories">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className={`category-btn ${
+                    selectedCategory === category ? 'active' : ''
+                  }`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
 
-          <div className="products">
-            {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="product-card"
-                onClick={() => setSelectedProduct(product)}
-              >
-                <h3>{product.name}</h3>
-                <p className="price">${product.price.toFixed(2)}</p>
-              </div>
-            ))}
+            <div className="products">
+              {filteredProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="product-card"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <h3>{product.name}</h3>
+                  <p className="price">${product.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <CashCount orders={orderHistory} />
+        )}
       </div>
 
-      <Cart
-        items={cartItems}
-        onRemoveItem={handleRemoveItem}
-        onUpdateQuantity={handleUpdateQuantity}
-        onCheckout={handleCheckout}
-      />
+      {currentView === 'order' && (
+        <Cart
+          items={cartItems}
+          onRemoveItem={handleRemoveItem}
+          onUpdateQuantity={handleUpdateQuantity}
+          onCheckout={handleCheckout}
+        />
+      )}
 
       {selectedProduct && (
         <ProductSelector
