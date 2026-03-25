@@ -11,20 +11,29 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   return (
     <div className="navigation">
-      <button
-        className={`nav-btn ${currentView === 'order' ? 'active' : ''}`}
-        onClick={() => onViewChange('order')}
-      >
-        <span className="nav-icon">🛒</span>
-        <span>点单</span>
-      </button>
-      <button
-        className={`nav-btn ${currentView === 'cashcount' ? 'active' : ''}`}
-        onClick={() => onViewChange('cashcount')}
-      >
-        <span className="nav-icon">💰</span>
-        <span>盘账</span>
-      </button>
+      <div className="nav-header">
+        <div className="nav-logo">☕</div>
+        <div className="nav-store-info">
+          <div className="nav-store-name">luckin coffee</div>
+          <div className="nav-store-number">Store #8</div>
+        </div>
+      </div>
+      <div className="nav-menu">
+        <button
+          className={`nav-btn ${currentView === 'order' ? 'active' : ''}`}
+          onClick={() => onViewChange('order')}
+        >
+          <span className="nav-icon">📋</span>
+          <span>Order</span>
+        </button>
+        <button
+          className={`nav-btn ${currentView === 'cashcount' ? 'active' : ''}`}
+          onClick={() => onViewChange('cashcount')}
+        >
+          <span className="nav-icon">💰</span>
+          <span>Cash Count</span>
+        </button>
+      </div>
     </div>
   );
 };

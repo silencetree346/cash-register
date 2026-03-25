@@ -90,7 +90,12 @@ function App() {
 
       <div className="main-content">
         <div className="header">
-          <h1>☕ Luckin Coffee</h1>
+          <h1>
+            {currentView === 'order' ? '📋 Order' : '💰 Cash Count'}
+          </h1>
+          <div className="header-actions">
+            <span className="header-time">{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
+          </div>
         </div>
 
         {currentView === 'order' ? (
