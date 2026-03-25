@@ -10,7 +10,7 @@ import { LeftPanel } from './components/LeftPanel';
 import './styles.css';
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showPayment, setShowPayment] = useState(false);
@@ -24,9 +24,9 @@ function App() {
     }
   }, []);
 
-  const filteredProducts = products.filter(
-    (p) => p.category === selectedCategory
-  );
+  const filteredProducts = selectedCategory === 'All' 
+    ? products 
+    : products.filter((p) => p.category === selectedCategory);
 
   const handleAddToCart = (item: CartItem) => {
     const existingIndex = cartItems.findIndex(
@@ -90,7 +90,7 @@ function App() {
 
       <div className="main-content">
         <div className="header">
-          <h1>📋 Order</h1>
+          <h1>📋 Menu</h1>
           <div className="header-actions">
             <span className="header-time">{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
@@ -98,6 +98,14 @@ function App() {
 
         <div className="content-wrapper">
           <div className="categories">
+            <button
+              className={`category-btn ${
+                selectedCategory === 'All' ? 'active' : ''
+              }`}
+              onClick={() => setSelectedCategory('All')}
+            >
+              All
+            </button>
             {categories.map((category) => (
               <button
                 key={category}

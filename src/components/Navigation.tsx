@@ -13,7 +13,7 @@ export const Navigation: React.FC = () => {
       <div className="nav-menu">
         <button className="nav-btn active">
           <span className="nav-icon">📋</span>
-          <span>Order</span>
+          <span>Menu</span>
         </button>
       </div>
     </div>
