@@ -88,13 +88,11 @@ function App() {
       <LeftPanel storeName="Store88" />
       <Navigation />
 
-      {selectedProduct && (
-        <ProductOptions
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
+      <ProductOptions
+        product={selectedProduct}
+        onAddToCart={handleAddToCart}
+        onClearProduct={() => setSelectedProduct(null)}
+      />
 
       <div className="main-content">
         <div className="header">

@@ -1,17 +1,17 @@
 import { Product, Option } from '../types';
 
-const cupOptions: Option[] = [
+export const cupOptions: Option[] = [
   { id: 'small', name: 'Small', price: 0 },
   { id: 'medium', name: 'Medium', price: 0.5 },
   { id: 'large', name: 'Large', price: 1 },
 ];
 
-const temperatureOptions: Option[] = [
+export const temperatureOptions: Option[] = [
   { id: 'hot', name: 'Hot', price: 0 },
   { id: 'iced', name: 'Iced', price: 0 },
 ];
 
-const iceOptions: Option[] = [
+export const iceOptions: Option[] = [
   { id: 'no-ice', name: 'No Ice', price: 0 },
   { id: 'light-ice', name: 'Light Ice', price: 0 },
   { id: 'regular-ice', name: 'Regular Ice', price: 0 },

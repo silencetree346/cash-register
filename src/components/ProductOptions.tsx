@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Product, Option, CartItem, CustomizationGroup } from '../types';
+import { cupOptions, temperatureOptions, iceOptions } from '../data/products';
 
 interface ProductOptionsProps {
-  product: Product;
+  product: Product | null;
   onAddToCart: (item: CartItem) => void;
-  onClose: () => void;
+  onClearProduct: () => void;
 }
 
 export const ProductOptions: React.FC<ProductOptionsProps> = ({
   product,
   onAddToCart,
-  onClose,
+  onClearProduct,
 }) => {
   const [selectedCupOption, setSelectedCupOption] = useState<Option>(
-    product.defaultOptions.cupOptions[0]
+    cupOptions[0]
   );
   const [selectedTemperature, setSelectedTemperature] = useState<Option>(
-    product.defaultOptions.temperature[0]
+    temperatureOptions[0]
   );
-  const [selectedIce, setSelectedIce] = useState<Option>(
-    product.defaultOptions.ice[0]
-  );
+  const [selectedIce, setSelectedIce] = useState<Option>(iceOptions[0]);
   const [customizations, setCustomizations] = useState<{
     [groupId: string]: Option[];
   }>({});
 
   useEffect(() => {
-    setSelectedCupOption(product.defaultOptions.cupOptions[0]);
-    setSelectedTemperature(product.defaultOptions.temperature[0]);
-    setSelectedIce(product.defaultOptions.ice[0]);
     setCustomizations({});
-  }, [product.id]);
+  }, [product?.id]);
 
   const toggleCustomizationOption = (group: CustomizationGroup, option: Option) => {
     const groupId = group.id;
@@ -58,6 +54,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   };
 
   const calculateTotalPrice = () => {
+    if (!product) return 0;
     let total = product.price;
     total += selectedCupOption.price || 0;
     total += selectedTemperature.price || 0;
@@ -73,6 +70,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   };
 
   const handleAddToCart = () => {
+    if (!product) return;
     const cartItem: CartItem = {
       product,
       selectedCupOption,
@@ -83,25 +81,29 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
       totalPrice: calculateTotalPrice(),
     };
     onAddToCart(cartItem);
-    onClose();
+    onClearProduct();
   };
 
   return (
     <div className="product-options-sidebar">
       <div className="sidebar-header">
-        <h3>{product.name}</h3>
-        <button className="close-btn" onClick={onClose}>×</button>
+        <h3>{product ? product.name : 'Remarks'}</h3>
+        {product && (
+          <button className="close-btn" onClick={onClearProduct}>×</button>
+        )}
       </div>
 
-      <div className="sidebar-price">
-        Base Price: ${product.price.toFixed(2)}
-      </div>
+      {product && (
+        <div className="sidebar-price">
+          Base Price: ${product.price.toFixed(2)}
+        </div>
+      )}
 
       <div className="sidebar-body">
         <div className="sidebar-section">
           <h4>Cup Size</h4>
           <div className="sidebar-options">
-            {product.defaultOptions.cupOptions.map((option) => (
+            {cupOptions.map((option) => (
               <button
                 key={option.id}
                 className={`sidebar-option-btn ${
@@ -119,7 +121,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
         <div className="sidebar-section">
           <h4>Temperature</h4>
           <div className="sidebar-options">
-            {product.defaultOptions.temperature.map((option) => (
+            {temperatureOptions.map((option) => (
               <button
                 key={option.id}
                 className={`sidebar-option-btn ${
@@ -136,7 +138,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
         <div className="sidebar-section">
           <h4>Ice</h4>
           <div className="sidebar-options">
-            {product.defaultOptions.ice.map((option) => (
+            {iceOptions.map((option) => (
               <button
                 key={option.id}
                 className={`sidebar-option-btn ${
@@ -150,39 +152,42 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           </div>
         </div>
 
-        {product.customizations.map((group) => (
-          <div key={group.id} className="sidebar-section">
-            <h4>{group.name}</h4>
-            <div className="sidebar-options">
-              {group.options.map((option) => {
-                const isSelected = (customizations[group.id] || []).some(
-                  (o) => o.id === option.id
-                );
-                return (
-                  <button
-                    key={option.id}
-                    className={`sidebar-option-btn ${isSelected ? 'selected' : ''}`}
-                    onClick={() => toggleCustomizationOption(group, option)}
-                  >
-                    {option.name}
-                    {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
-                  </button>
-                );
-              })}
+        {product &&
+          product.customizations.map((group) => (
+            <div key={group.id} className="sidebar-section">
+              <h4>{group.name}</h4>
+              <div className="sidebar-options">
+                {group.options.map((option) => {
+                  const isSelected = (customizations[group.id] || []).some(
+                    (o) => o.id === option.id
+                  );
+                  return (
+                    <button
+                      key={option.id}
+                      className={`sidebar-option-btn ${isSelected ? 'selected' : ''}`}
+                      onClick={() => toggleCustomizationOption(group, option)}
+                    >
+                      {option.name}
+                      {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
+          ))}
+      </div>
+
+      {product && (
+        <div className="sidebar-footer">
+          <div className="sidebar-total">
+            Total: ${calculateTotalPrice().toFixed(2)}
           </div>
-        ))}
-      </div>
 
-      <div className="sidebar-footer">
-        <div className="sidebar-total">
-          Total: ${calculateTotalPrice().toFixed(2)}
+          <button className="add-to-cart-btn-sidebar" onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
-
-        <button className="add-to-cart-btn-sidebar" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
-      </div>
+      )}
     </div>
   );
 };
