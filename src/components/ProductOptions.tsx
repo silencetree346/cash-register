@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Product, Option, CartItem, CustomizationGroup } from '../types';
 
 interface ProductOptionsProps {
@@ -21,10 +21,16 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   const [selectedIce, setSelectedIce] = useState<Option>(
     product.defaultOptions.ice[0]
   );
-  const [showCustomization, setShowCustomization] = useState(false);
   const [customizations, setCustomizations] = useState<{
     [groupId: string]: Option[];
   }>({});
+
+  useEffect(() => {
+    setSelectedCupOption(product.defaultOptions.cupOptions[0]);
+    setSelectedTemperature(product.defaultOptions.temperature[0]);
+    setSelectedIce(product.defaultOptions.ice[0]);
+    setCustomizations({});
+  }, [product.id]);
 
   const toggleCustomizationOption = (group: CustomizationGroup, option: Option) => {
     const groupId = group.id;
@@ -81,17 +87,17 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   };
 
   return (
-    <>
-      <div className="product-options-sidebar">
-        <div className="sidebar-header">
-          <h3>{product.name}</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
-        </div>
+    <div className="product-options-sidebar">
+      <div className="sidebar-header">
+        <h3>{product.name}</h3>
+        <button className="close-btn" onClick={onClose}>×</button>
+      </div>
 
-        <div className="sidebar-price">
-          Base Price: ${product.price.toFixed(2)}
-        </div>
+      <div className="sidebar-price">
+        Base Price: ${product.price.toFixed(2)}
+      </div>
 
+      <div className="sidebar-body">
         <div className="sidebar-section">
           <h4>Cup Size</h4>
           <div className="sidebar-options">
@@ -144,66 +150,39 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           </div>
         </div>
 
-        <div className="sidebar-footer">
-          <button
-            className="options-btn"
-            onClick={() => setShowCustomization(true)}
-          >
-            Options
-          </button>
-          
-          <div className="sidebar-total">
-            Total: ${calculateTotalPrice().toFixed(2)}
+        {product.customizations.map((group) => (
+          <div key={group.id} className="sidebar-section">
+            <h4>{group.name}</h4>
+            <div className="sidebar-options">
+              {group.options.map((option) => {
+                const isSelected = (customizations[group.id] || []).some(
+                  (o) => o.id === option.id
+                );
+                return (
+                  <button
+                    key={option.id}
+                    className={`sidebar-option-btn ${isSelected ? 'selected' : ''}`}
+                    onClick={() => toggleCustomizationOption(group, option)}
+                  >
+                    {option.name}
+                    {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-
-          <button className="add-to-cart-btn-sidebar" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
-        </div>
+        ))}
       </div>
 
-      {showCustomization && (
-        <div className="modal-overlay" onClick={() => setShowCustomization(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Customization</h2>
-              <button className="modal-close" onClick={() => setShowCustomization(false)}>
-                ×
-              </button>
-            </div>
-            <div className="modal-body">
-              {product.customizations.map((group) => (
-                <div key={group.id} className="option-section">
-                  <h3>{group.name}</h3>
-                  <div className="option-group">
-                    {group.options.map((option) => {
-                      const isSelected = (customizations[group.id] || []).some(
-                        (o) => o.id === option.id
-                      );
-                      return (
-                        <button
-                          key={option.id}
-                          className={`option-btn ${isSelected ? 'selected' : ''}`}
-                          onClick={() => toggleCustomizationOption(group, option)}
-                        >
-                          {option.name}
-                          {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-              <button
-                className="customization-toggle"
-                onClick={() => setShowCustomization(false)}
-              >
-                确认
-              </button>
-            </div>
-          </div>
+      <div className="sidebar-footer">
+        <div className="sidebar-total">
+          Total: ${calculateTotalPrice().toFixed(2)}
         </div>
-      )}
-    </>
+
+        <button className="add-to-cart-btn-sidebar" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
+      </div>
+    </div>
   );
 };

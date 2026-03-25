@@ -1217,6 +1217,17 @@ body {
   flex-direction: column;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
+  align-self: stretch;
+  min-height: 0;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .sidebar-header {
@@ -1306,29 +1317,10 @@ body {
 }
 
 .sidebar-footer {
-  margin-top: auto;
+  flex-shrink: 0;
   padding: 20px;
   background: #fafafa;
   border-top: 1px solid #e0e0e0;
-}
-
-.options-btn {
-  width: 100%;
-  padding: 12px;
-  background: white;
-  color: #0066CC;
-  border: 2px solid #0066CC;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 15px;
-}
-
-.options-btn:hover {
-  background: #0066CC;
-  color: white;
 }
 
 .sidebar-total {
