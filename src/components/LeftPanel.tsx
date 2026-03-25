@@ -8,6 +8,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({ storeName }) => {
   const [showCodeInput, setShowCodeInput] = useState(false);
   const [codeInputType, setCodeInputType] = useState<'pickup' | 'finish'>('pickup');
   const [code, setCode] = useState('');
+  const [showClockOptions, setShowClockOptions] = useState(false);
 
   const handleOpenCodeInput = (type: 'pickup' | 'finish') => {
     setCodeInputType(type);
@@ -39,6 +40,11 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({ storeName }) => {
     setCode(code.slice(0, -1));
   };
 
+  const handleClockAction = (action: string) => {
+    alert(`${action} 成功！时间: ${new Date().toLocaleString('zh-CN')}`);
+    setShowClockOptions(false);
+  };
+
   return (
     <>
       <div className="left-panel">
@@ -57,6 +63,9 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({ storeName }) => {
             Finish by code
           </button>
         </div>
+        <button className="clock-in-btn" onClick={() => setShowClockOptions(true)}>
+          🕐
+        </button>
       </div>
 
       {showCodeInput && (
@@ -99,6 +108,47 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({ storeName }) => {
               >
                 {codeInputType === 'pickup' ? 'Pick up' : 'Finish'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showClockOptions && (
+        <div className="modal-overlay" onClick={() => setShowClockOptions(false)}>
+          <div className="modal clock-options-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>打卡选项</h2>
+              <button className="modal-close" onClick={() => setShowClockOptions(false)}>
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="clock-options">
+                <button
+                  className="clock-option-btn clock-in"
+                  onClick={() => handleClockAction('Clock In')}
+                >
+                  Clock In
+                </button>
+                <button
+                  className="clock-option-btn clock-out"
+                  onClick={() => handleClockAction('Clock Out')}
+                >
+                  Clock Out
+                </button>
+                <button
+                  className="clock-option-btn break-start"
+                  onClick={() => handleClockAction('Break Start')}
+                >
+                  Break Start
+                </button>
+                <button
+                  className="clock-option-btn break-end"
+                  onClick={() => handleClockAction('Break End')}
+                >
+                  Break End
+                </button>
+              </div>
             </div>
           </div>
         </div>

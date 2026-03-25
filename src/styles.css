@@ -643,13 +643,14 @@ body {
   flex-direction: column;
   gap: 0;
   flex-shrink: 0;
+  position: relative;
 }
 
 .store-name {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: white;
-  padding: 20px 0;
+  padding: 15px 0;
   background: #4267B2;
   text-align: center;
 }
@@ -1110,4 +1111,100 @@ body {
 .submit-code-btn:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+.clock-in-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #0066CC;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+  transition: all 0.2s ease;
+}
+
+.clock-in-btn:hover {
+  background: #0052A3;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+}
+
+.clock-options-modal .modal {
+  max-width: 400px;
+}
+
+.clock-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.clock-option-btn {
+  padding: 25px 20px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.clock-option-btn:hover {
+  border-color: #0066CC;
+  background: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.clock-option-btn.clock-in {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.clock-option-btn.clock-in:hover {
+  background: #28a745;
+  color: white;
+}
+
+.clock-option-btn.clock-out {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.clock-option-btn.clock-out:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.clock-option-btn.break-start {
+  border-color: #ffc107;
+  color: #e6a800;
+}
+
+.clock-option-btn.break-start:hover {
+  background: #ffc107;
+  color: white;
+}
+
+.clock-option-btn.break-end {
+  border-color: #17a2b8;
+  color: #138496;
+}
+
+.clock-option-btn.break-end:hover {
+  background: #17a2b8;
+  color: white;
 }
