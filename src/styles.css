@@ -1212,11 +1212,10 @@ body {
 .product-options-sidebar {
   width: 320px;
   background: white;
-  border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
 }
 

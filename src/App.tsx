@@ -88,6 +88,14 @@ function App() {
       <LeftPanel storeName="Store88" />
       <Navigation />
 
+      {selectedProduct && (
+        <ProductOptions
+          product={selectedProduct}
+          onAddToCart={handleAddToCart}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+
       <div className="main-content">
         <div className="header">
           <h1>📋 Menu</h1>
@@ -140,14 +148,6 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onCheckout={handleCheckout}
       />
-
-      {selectedProduct && (
-        <ProductOptions
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
 
       {showPayment && (
         <Payment
