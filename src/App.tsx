@@ -6,11 +6,9 @@ import { Cart } from './components/Cart';
 import { Payment } from './components/Payment';
 import { OrderComplete } from './components/OrderComplete';
 import { Navigation } from './components/Navigation';
-import { CashCount } from './components/CashCount';
 import './styles.css';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'order' | 'cashcount'>('order');
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -86,60 +84,52 @@ function App() {
 
   return (
     <div className="app">
-      <Navigation currentView={currentView} onViewChange={setCurrentView} />
+      <Navigation />
 
       <div className="main-content">
         <div className="header">
-          <h1>
-            {currentView === 'order' ? '📋 Order' : '💰 Cash Count'}
-          </h1>
+          <h1>📋 Order</h1>
           <div className="header-actions">
             <span className="header-time">{new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
         </div>
 
-        {currentView === 'order' ? (
-          <div className="content-wrapper">
-            <div className="categories">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className={`category-btn ${
-                    selectedCategory === category ? 'active' : ''
-                  }`}
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            <div className="products">
-              {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="product-card"
-                  onClick={() => setSelectedProduct(product)}
-                >
-                  <h3>{product.name}</h3>
-                  <p className="price">${product.price.toFixed(2)}</p>
-                </div>
-              ))}
-            </div>
+        <div className="content-wrapper">
+          <div className="categories">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-btn ${
+                  selectedCategory === category ? 'active' : ''
+                }`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
           </div>
-        ) : (
-          <CashCount orders={orderHistory} />
-        )}
+
+          <div className="products">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="product-card"
+                onClick={() => setSelectedProduct(product)}
+              >
+                <h3>{product.name}</h3>
+                <p className="price">${product.price.toFixed(2)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {currentView === 'order' && (
-        <Cart
-          items={cartItems}
-          onRemoveItem={handleRemoveItem}
-          onUpdateQuantity={handleUpdateQuantity}
-          onCheckout={handleCheckout}
-        />
-      )}
+      <Cart
+        items={cartItems}
+        onRemoveItem={handleRemoveItem}
+        onUpdateQuantity={handleUpdateQuantity}
+        onCheckout={handleCheckout}
+      />
 
       {selectedProduct && (
         <ProductSelector
