@@ -90,11 +90,11 @@ function App() {
 
       <div className="main-content">
         <div className="header">
-          <h1>☕ 咖啡收银系统</h1>
+          <h1>☕ Luckin Coffee</h1>
         </div>
 
         {currentView === 'order' ? (
-          <div style={{ padding: '20px' }}>
+          <div className="content-wrapper">
             <div className="categories">
               {categories.map((category) => (
                 <button
