@@ -6,6 +6,7 @@ import { Cart } from './components/Cart';
 import { Payment } from './components/Payment';
 import { OrderComplete } from './components/OrderComplete';
 import { Navigation } from './components/Navigation';
+import { LeftPanel } from './components/LeftPanel';
 import './styles.css';
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
 
   return (
     <div className="app">
+      <LeftPanel storeName="Store88" />
       <Navigation />
 
       <div className="main-content">

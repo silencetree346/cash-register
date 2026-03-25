@@ -635,6 +635,54 @@ body {
   background: #0052A3;
 }
 
+.left-panel {
+  width: 20%;
+  background: #f5f5f5;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.store-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.code-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.code-action-btn {
+  padding: 14px 16px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.code-action-btn:hover {
+  border-color: #0066CC;
+  background: #f8f8f8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
 .navigation {
   width: 200px;
   background: #2b2b2b;
@@ -642,7 +690,6 @@ body {
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-  margin-left: 20%;
 }
 
 .nav-header {
@@ -972,4 +1019,96 @@ body {
 
 .save-btn:hover {
   background: #218838;
+}
+
+.code-input-modal {
+  max-width: 450px;
+}
+
+.code-display {
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 8px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  border: 2px solid #e0e0e0;
+}
+
+.number-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.number-btn {
+  padding: 20px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.number-btn:hover {
+  background: #f8f8f8;
+  border-color: #0066CC;
+}
+
+.number-btn:active {
+  transform: scale(0.95);
+}
+
+.clear-btn {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+.clear-btn:hover {
+  background: #ee5a5a;
+  border-color: #ee5a5a;
+}
+
+.backspace-btn {
+  background: #ffa500;
+  color: white;
+  border-color: #ffa500;
+}
+
+.backspace-btn:hover {
+  background: #ff9500;
+  border-color: #ff9500;
+}
+
+.submit-code-btn {
+  width: 100%;
+  padding: 16px;
+  background: #0066CC;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-code-btn:hover {
+  background: #0052A3;
+}
+
+.submit-code-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
