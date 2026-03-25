@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { products, categories } from './data/products';
 import { Product, CartItem, Order } from './types';
-import { ProductSelector } from './components/ProductSelector';
+import { ProductOptions } from './components/ProductOptions';
 import { Cart } from './components/Cart';
 import { Payment } from './components/Payment';
 import { OrderComplete } from './components/OrderComplete';
@@ -142,7 +142,7 @@ function App() {
       />
 
       {selectedProduct && (
-        <ProductSelector
+        <ProductOptions
           product={selectedProduct}
           onAddToCart={handleAddToCart}
           onClose={() => setSelectedProduct(null)}

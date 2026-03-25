@@ -1208,3 +1208,155 @@ body {
   background: #17a2b8;
   color: white;
 }
+
+.product-options-sidebar {
+  width: 320px;
+  background: white;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  background: #4267B2;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.sidebar-header .close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.sidebar-header .close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-price {
+  padding: 15px 20px;
+  background: #f8f8f8;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0066CC;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-section {
+  padding: 20px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.sidebar-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.sidebar-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.sidebar-option-btn {
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  text-align: center;
+  color: #333;
+}
+
+.sidebar-option-btn:hover {
+  border-color: #0066CC;
+  background: #f8f8f8;
+}
+
+.sidebar-option-btn.selected {
+  background: #0066CC;
+  color: white;
+  border-color: #0066CC;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  background: #fafafa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.options-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #0066CC;
+  border: 2px solid #0066CC;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 15px;
+}
+
+.options-btn:hover {
+  background: #0066CC;
+  color: white;
+}
+
+.sidebar-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.add-to-cart-btn-sidebar {
+  width: 100%;
+  padding: 14px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-to-cart-btn-sidebar:hover {
+  background: #218838;
+}
