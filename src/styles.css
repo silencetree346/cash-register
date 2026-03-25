@@ -1116,8 +1116,7 @@ body {
 .clock-in-btn {
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -1135,7 +1134,7 @@ body {
 
 .clock-in-btn:hover {
   background: #0052A3;
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
 }
 
