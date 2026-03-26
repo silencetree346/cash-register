@@ -1345,6 +1345,27 @@ body {
   border-color: #0066CC;
 }
 
+.sidebar-customize-wrap {
+  padding-top: 6px;
+}
+
+.sidebar-customize-btn {
+  width: 100%;
+  padding: 5px 4px;
+  background: #0066CC;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidebar-customize-btn:hover {
+  background: #0052A3;
+}
+
 .sidebar-footer {
   flex-shrink: 0;
   padding: 6px 5px;

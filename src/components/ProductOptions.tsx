@@ -23,9 +23,11 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   const [customizations, setCustomizations] = useState<{
     [groupId: string]: Option[];
   }>({});
+  const [showCustomization, setShowCustomization] = useState(false);
 
   useEffect(() => {
     setCustomizations({});
+    setShowCustomization(false);
   }, [product?.id]);
 
   const toggleCustomizationOption = (group: CustomizationGroup, option: Option) => {
@@ -152,29 +154,17 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           </div>
         </div>
 
-        {product &&
-          product.customizations.map((group) => (
-            <div key={group.id} className="sidebar-section">
-              <h4>{group.name}</h4>
-              <div className="sidebar-options">
-                {group.options.map((option) => {
-                  const isSelected = (customizations[group.id] || []).some(
-                    (o) => o.id === option.id
-                  );
-                  return (
-                    <button
-                      key={option.id}
-                      className={`sidebar-option-btn ${isSelected ? 'selected' : ''}`}
-                      onClick={() => toggleCustomizationOption(group, option)}
-                    >
-                      {option.name}
-                      {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+        {product && product.customizations.length > 0 && (
+          <div className="sidebar-section sidebar-customize-wrap">
+            <button
+              type="button"
+              className="sidebar-customize-btn"
+              onClick={() => setShowCustomization(true)}
+            >
+              Customize
+            </button>
+          </div>
+        )}
       </div>
 
       {product && (
@@ -186,6 +176,55 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           <button className="add-to-cart-btn-sidebar" onClick={handleAddToCart}>
             Add to Cart
           </button>
+        </div>
+      )}
+
+      {showCustomization && product && product.customizations.length > 0 && (
+        <div className="modal-overlay" onClick={() => setShowCustomization(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Customization</h2>
+              <button
+                type="button"
+                className="modal-close"
+                onClick={() => setShowCustomization(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              {product.customizations.map((group) => (
+                <div key={group.id} className="option-section">
+                  <h3>{group.name}</h3>
+                  <div className="option-group">
+                    {group.options.map((option) => {
+                      const isSelected = (customizations[group.id] || []).some(
+                        (o) => o.id === option.id
+                      );
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={`option-btn ${isSelected ? 'selected' : ''}`}
+                          onClick={() => toggleCustomizationOption(group, option)}
+                        >
+                          {option.name}
+                          {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+              <button
+                type="button"
+                className="customization-toggle"
+                onClick={() => setShowCustomization(false)}
+              >
+                确认
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
