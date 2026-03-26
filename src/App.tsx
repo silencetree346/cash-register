@@ -129,7 +129,9 @@ function App() {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="product-card"
+                className={`product-card ${
+                  selectedProduct?.id === product.id ? 'selected' : ''
+                }`}
                 onClick={() => setSelectedProduct(product)}
               >
                 <h3>{product.name}</h3>
