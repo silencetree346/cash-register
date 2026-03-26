@@ -140,12 +140,14 @@ function App() {
         </div>
       </div>
 
-      <Cart
-        items={cartItems}
-        onRemoveItem={handleRemoveItem}
-        onUpdateQuantity={handleUpdateQuantity}
-        onCheckout={handleCheckout}
-      />
+      {cartItems.length > 0 && (
+        <Cart
+          items={cartItems}
+          onRemoveItem={handleRemoveItem}
+          onUpdateQuantity={handleUpdateQuantity}
+          onCheckout={handleCheckout}
+        />
+      )}
 
       {showPayment && (
         <Payment
