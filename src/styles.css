@@ -411,6 +411,17 @@ body {
   border-bottom: 1px solid #e8e8e8;
 }
 
+.espresso-options-block .espresso-subsection {
+  margin-bottom: 16px;
+}
+
+.espresso-options-block .espresso-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+
 .option-group {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Product, Option, CartItem, CustomizationGroup } from '../types';
-import { cupOptions, temperatureOptions, iceOptions } from '../data/products';
+import {
+  cupOptions,
+  temperatureOptions,
+  iceOptions,
+  modalSyrupGroup,
+  modalCreamGroup,
+  modalPowdersGroup,
+  modalEspressoSubGroups,
+  getCustomizeModalProductExtras,
+} from '../data/products';
 
 interface ProductOptionsProps {
   product: Product | null;
@@ -86,6 +95,30 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
     onClearProduct();
   };
 
+  const renderModalGroup = (group: CustomizationGroup) => (
+    <div key={group.id} className="option-section">
+      <h3>{group.name}</h3>
+      <div className="option-group">
+        {group.options.map((option) => {
+          const isSelected = (customizations[group.id] || []).some(
+            (o) => o.id === option.id
+          );
+          return (
+            <button
+              key={option.id}
+              type="button"
+              className={`option-btn ${isSelected ? 'selected' : ''}`}
+              onClick={() => toggleCustomizationOption(group, option)}
+            >
+              {option.name}
+              {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   return (
     <div className="product-options-sidebar">
       <div className="sidebar-header">
@@ -154,7 +187,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           </div>
         </div>
 
-        {product && product.customizations.length > 0 && (
+        {product && (
           <div className="sidebar-section sidebar-customize-wrap">
             <button
               type="button"
@@ -179,7 +212,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
         </div>
       )}
 
-      {showCustomization && product && product.customizations.length > 0 && (
+      {showCustomization && product && (
         <div className="modal-overlay" onClick={() => setShowCustomization(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
@@ -193,29 +226,38 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
               </button>
             </div>
             <div className="modal-body">
-              {product.customizations.map((group) => (
-                <div key={group.id} className="option-section">
-                  <h3>{group.name}</h3>
-                  <div className="option-group">
-                    {group.options.map((option) => {
-                      const isSelected = (customizations[group.id] || []).some(
-                        (o) => o.id === option.id
-                      );
-                      return (
-                        <button
-                          key={option.id}
-                          type="button"
-                          className={`option-btn ${isSelected ? 'selected' : ''}`}
-                          onClick={() => toggleCustomizationOption(group, option)}
-                        >
-                          {option.name}
-                          {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
-                        </button>
-                      );
-                    })}
+              {[modalSyrupGroup, modalCreamGroup, modalPowdersGroup].map((group) =>
+                renderModalGroup(group)
+              )}
+              <div className="option-section espresso-options-block">
+                <h3>Espresso Options</h3>
+                {modalEspressoSubGroups.map((group) => (
+                  <div key={group.id} className="espresso-subsection">
+                    <h4 className="espresso-subtitle">{group.name}</h4>
+                    <div className="option-group">
+                      {group.options.map((option) => {
+                        const isSelected = (customizations[group.id] || []).some(
+                          (o) => o.id === option.id
+                        );
+                        return (
+                          <button
+                            key={option.id}
+                            type="button"
+                            className={`option-btn ${isSelected ? 'selected' : ''}`}
+                            onClick={() => toggleCustomizationOption(group, option)}
+                          >
+                            {option.name}
+                            {option.price ? ` (+$${option.price.toFixed(2)})` : ''}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              {getCustomizeModalProductExtras(product).map((group) =>
+                renderModalGroup(group)
+              )}
               <button
                 type="button"
                 className="customization-toggle"

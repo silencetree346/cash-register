@@ -1,4 +1,4 @@
-import { Product, Option } from '../types';
+import { Product, Option, CustomizationGroup } from '../types';
 
 export const cupOptions: Option[] = [
   { id: 'small', name: 'Small', price: 0 },
@@ -18,36 +18,6 @@ export const iceOptions: Option[] = [
   { id: 'extra-ice', name: 'Extra Ice', price: 0 },
 ];
 
-const espressoCustomizations = [
-  {
-    id: 'roast-options',
-    name: 'Roast Options',
-    options: [
-      { id: 'light', name: 'Light Roast', price: 0 },
-      { id: 'medium', name: 'Medium Roast', price: 0 },
-      { id: 'dark', name: 'Dark Roast', price: 0 },
-    ],
-  },
-  {
-    id: 'extraction-options',
-    name: 'Extraction Options',
-    options: [
-      { id: 'ristretto', name: 'Ristretto', price: 0 },
-      { id: 'normale', name: 'Normale', price: 0 },
-      { id: 'lungo', name: 'Lungo', price: 0 },
-    ],
-  },
-  {
-    id: 'shot',
-    name: 'Shot',
-    options: [
-      { id: 'single', name: 'Single Shot', price: 0 },
-      { id: 'double', name: 'Double Shot', price: 0.5 },
-      { id: 'triple', name: 'Triple Shot', price: 1 },
-    ],
-  },
-];
-
 const milkCustomizations = [
   {
     id: 'milk-base',
@@ -63,32 +33,84 @@ const milkCustomizations = [
   },
 ];
 
-const syrupCustomizations = [
+export const modalSyrupGroup: CustomizationGroup = {
+  id: 'modal-syrup',
+  name: 'Syrup',
+  multiSelect: true,
+  options: [
+    { id: 'ms-vanilla', name: 'Vanilla', price: 0.5 },
+    { id: 'ms-caramel', name: 'Caramel', price: 0.5 },
+    { id: 'ms-hazelnut', name: 'Hazelnut', price: 0.5 },
+    { id: 'ms-mocha', name: 'Mocha', price: 0.5 },
+    { id: 'ms-brown-sugar', name: 'Brown Sugar', price: 0.5 },
+    { id: 'ms-toffee-nut', name: 'Toffee Nut', price: 0.5 },
+    { id: 'ms-peppermint', name: 'Peppermint', price: 0.5 },
+    { id: 'ms-sf-vanilla', name: 'Sugar Free Vanilla', price: 0.5 },
+    { id: 'ms-honey', name: 'Honey', price: 0.5 },
+  ],
+};
+
+export const modalCreamGroup: CustomizationGroup = {
+  id: 'modal-cream',
+  name: 'Cream',
+  multiSelect: true,
+  options: [
+    { id: 'mc-whipped', name: 'Whipped Cream', price: 0.5 },
+    { id: 'mc-cold-foam', name: 'Cold Foam', price: 0.5 },
+    { id: 'mc-sweet-cream', name: 'Sweet Cream', price: 0.5 },
+    { id: 'mc-vanilla-sweet-cream', name: 'Vanilla Sweet Cream', price: 0.5 },
+    { id: 'mc-heavy-cream', name: 'Heavy Cream', price: 0.5 },
+    { id: 'mc-half-half', name: 'Half & Half', price: 0 },
+  ],
+};
+
+export const modalPowdersGroup: CustomizationGroup = {
+  id: 'modal-powders',
+  name: 'Powders',
+  multiSelect: true,
+  options: [
+    { id: 'mp-cocoa', name: 'Cocoa Powder', price: 0.3 },
+    { id: 'mp-cinnamon', name: 'Cinnamon', price: 0.3 },
+    { id: 'mp-matcha-dust', name: 'Matcha Powder', price: 0.5 },
+    { id: 'mp-vanilla-powder', name: 'Vanilla Powder', price: 0.3 },
+    { id: 'mp-cinnamon-dolce', name: 'Cinnamon Dolce', price: 0.3 },
+    { id: 'mp-nutmeg', name: 'Nutmeg', price: 0.3 },
+  ],
+};
+
+export const modalEspressoSubGroups: CustomizationGroup[] = [
   {
-    id: 'syrup',
-    name: 'Syrup',
-    multiSelect: true,
+    id: 'modal-espresso-roast',
+    name: 'Roast',
     options: [
-      { id: 'vanilla', name: 'Vanilla', price: 0.5 },
-      { id: 'caramel', name: 'Caramel', price: 0.5 },
-      { id: 'hazelnut', name: 'Hazelnut', price: 0.5 },
-      { id: 'mocha', name: 'Mocha', price: 0.5 },
+      { id: 'mer-light', name: 'Light Roast', price: 0 },
+      { id: 'mer-medium', name: 'Medium Roast', price: 0 },
+      { id: 'mer-dark', name: 'Dark Roast', price: 0 },
+    ],
+  },
+  {
+    id: 'modal-espresso-extraction',
+    name: 'Extraction',
+    options: [
+      { id: 'mee-ristretto', name: 'Ristretto', price: 0 },
+      { id: 'mee-normale', name: 'Normale', price: 0 },
+      { id: 'mee-lungo', name: 'Lungo', price: 0 },
+    ],
+  },
+  {
+    id: 'modal-espresso-shot',
+    name: 'Shot',
+    options: [
+      { id: 'mes-single', name: 'Single Shot', price: 0 },
+      { id: 'mes-double', name: 'Double Shot', price: 0.5 },
+      { id: 'mes-triple', name: 'Triple Shot', price: 1 },
     ],
   },
 ];
 
-const toppingCustomizations = [
-  {
-    id: 'toppings',
-    name: 'Toppings',
-    multiSelect: true,
-    options: [
-      { id: 'whipped-cream', name: 'Whipped Cream', price: 0.5 },
-      { id: 'cocoa-powder', name: 'Cocoa Powder', price: 0.3 },
-      { id: 'cinnamon', name: 'Cinnamon', price: 0.3 },
-    ],
-  },
-];
+export function getCustomizeModalProductExtras(product: Product): CustomizationGroup[] {
+  return product.customizations;
+}
 
 export const products: Product[] = [
   {
@@ -101,7 +123,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...syrupCustomizations],
+    customizations: [],
   },
   {
     id: 'iced-latte',
@@ -113,7 +135,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...syrupCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'iced-coconut-latte',
@@ -125,7 +147,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...syrupCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'iced-caramel-macchiato',
@@ -137,7 +159,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'hot-americano',
@@ -149,7 +171,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...syrupCustomizations],
+    customizations: [],
   },
   {
     id: 'hot-latte',
@@ -161,7 +183,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...syrupCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'hot-cappuccino',
@@ -173,7 +195,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'hot-mocha',
@@ -185,7 +207,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'signature-vanilla-latte',
@@ -197,7 +219,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'signature-caramel-cloud',
@@ -209,7 +231,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...espressoCustomizations, ...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'cold-brew-original',
@@ -221,7 +243,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...syrupCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'cold-brew-vanilla',
@@ -233,7 +255,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'matcha-latte',
@@ -245,7 +267,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...syrupCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'matcha-frappe',
@@ -257,7 +279,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'caramel-frappe',
@@ -269,7 +291,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
   {
     id: 'mocha-frappe',
@@ -281,7 +303,7 @@ export const products: Product[] = [
       temperature: temperatureOptions,
       ice: iceOptions,
     },
-    customizations: [...milkCustomizations, ...toppingCustomizations],
+    customizations: [...milkCustomizations],
   },
 ];
 
